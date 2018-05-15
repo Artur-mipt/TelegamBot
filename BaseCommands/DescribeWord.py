@@ -1,16 +1,19 @@
 import json
 import numpy
+import os
 
 
 def describe_word(bot, update):
 
     word = update.message.text.split()[1]
 
-    with open('/home/artur/PycharmProjects/ParseWikiMipt/NotSrcFiles/DictMain', 'r') as file:
+    path = os.getcwd()
+    path = path.replace('BaseCommands', '')
+    with open('{}/NotSrcFiles/DictMain'.format(path), 'r') as file:
         hist_main = json.load(file)
-    with open('/home/artur/PycharmProjects/ParseWikiMipt/NotSrcFiles/DictNext', 'r') as file:
+    with open('{}/NotSrcFiles/DictNext'.format(path), 'r') as file:
         hist_next = json.load(file)
-    with open('/home/artur/PycharmProjects/ParseWikiMipt/NotSrcFiles/DictPrev', 'r') as file:
+    with open('{}/NotSrcFiles/DictPrev'.format(path), 'r') as file:
         hist_prev = json.load(file)
 
     if word not in hist_main:

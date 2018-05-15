@@ -9,6 +9,7 @@ from BaseCommands.Start import start
 from ParsingPage.BuildingJson import build_json
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
+import os
 
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',

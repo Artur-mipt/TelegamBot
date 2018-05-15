@@ -2,6 +2,7 @@ import urllib.request
 from bs4 import BeautifulSoup
 from ParsingPage.BuildingModel import build_dict_next, build_dict_prev, build_dict_main
 import re
+import os
 
 
 def get_html(url):
@@ -27,8 +28,12 @@ def parse_html(html, hist_next, hist_prev, hist_main, used_links):
     reg = re.compile('[^а-яА-Я ]')
     s = reg.sub('', s)
     s = re.sub(r'\s+', ' ', s)
+    s = s.replace('страница', '')
+    s = s.replace('отсутствует', '')
 
-    with open('/home/artur/PycharmProjects/ParseWikiMipt/NotSrcFiles/ContentPage', 'a') as file:
+    path = os.getcwd()
+    path = path.replace('ParsingPage', '')
+    with open('{}/NotSrcFiles/ContentPage'.format(path), 'a') as file:
         file.write(s)
 
     words = s.split(' ')

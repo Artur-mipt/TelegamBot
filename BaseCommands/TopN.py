@@ -1,6 +1,7 @@
 import json
 from operator import itemgetter
 import numpy
+import os
 
 
 def in_interval(a, b, c):
@@ -9,7 +10,9 @@ def in_interval(a, b, c):
 
 def top_n(bot, update):
 
-    with open('/home/artur/PycharmProjects/ParseWikiMipt/NotSrcFiles/DictMain', 'r') as file:
+    path = os.getcwd()
+    path = path.replace('BaseCommands', '')
+    with open('{}/NotSrcFiles/DictMain'.format(path), 'r') as file:
         hist = json.load(file)
 
     count = int(update.message.text.split()[1])

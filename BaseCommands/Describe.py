@@ -2,7 +2,7 @@ from BaseCommands.DescribeWord import describe_word
 import json
 import numpy
 import matplotlib.pyplot as plt
-
+import os
 
 def in_interval(a, b, c):
     return a < c < b
@@ -35,16 +35,19 @@ def describe_frequency(bot, update, hist):
     x = []
     y = []
     for key in sorted(frequency_hist):
-        x.append(key)
-        y.append(frequency_hist[key])
+        if key != 1:
+            x.append(key)
+            y.append(frequency_hist[key])
 
     line_frequency = plt.plot(x, y, 'go:')
-    plt.axis([0.0, 15.0, 0.0, 150.0])
+    plt.axis([0.0, 15.0, 0.0, 500.0])
     plt.xlabel(u'Частота слова')
     plt.ylabel(u'Кол-во слов с такой частотой')
     plt.grid()
 
-    path = '/home/artur/PycharmProjects/ParseWikiMipt/NotSrcFiles/frequency.png'
+    path = os.getcwd()
+    path = path.replace('BaseCommands', '')
+    path = '{}/NotSrcFiles/frequency.png'.format(path)
     plt.savefig(path, format='png')
     bot.send_photo(chat_id=update.message.chat_id, photo=open(path, 'rb'))
     plt.clf()
@@ -71,12 +74,14 @@ def describe_length(bot, update, hist):
         y.append(length_hist[key])
 
     line_length = plt.plot(x, y, 'r^:')
-    plt.axis([0.0, 20.0, 0.0, 200.0])
+    plt.axis([0.0, 20.0, 0.0, 500.0])
     plt.xlabel(u'Длина слова')
     plt.ylabel(u'Кол-во слов с такой длиной')
     plt.grid()
 
-    path = '/home/artur/PycharmProjects/ParseWikiMipt/NotSrcFiles/length.png'
+    path = os.getcwd()
+    path = path.replace('BaseCommands', '')
+    path = '{}/NotSrcFiles/length.png'.format(path)
     plt.savefig(path, format='png')
     bot.send_photo(chat_id=update.message.chat_id, photo=open(path, 'rb'))
     plt.clf()
@@ -88,7 +93,9 @@ def describe(bot, update):
         describe_word(bot, update)
         return
 
-    with open('/home/artur/PycharmProjects/ParseWikiMipt/NotSrcFiles/DictMain', 'r') as file:
+    path = os.getcwd()
+    path = path.replace('BaseCommands', '')
+    with open('{}/NotSrcFiles/DictMain'.format(path), 'r') as file:
         hist = json.load(file)
 
     describe_frequency(bot, update, hist)

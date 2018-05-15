@@ -5,8 +5,15 @@ import os
 
 def build_json(bot, update):
 
-    path = '/home/artur/PycharmProjects/ParseWikiMipt/NotSrcFiles/ContentPage'
-    with open(path, 'w'):
+    path = os.getcwd()
+    path = path.replace('ParsingPage', '')
+    with open('{}/NotSrcFiles/DictNext'.format(path), 'w') as file:
+        pass
+    with open('{}/NotSrcFiles/DictPrev'.format(path), 'w') as file:
+        pass
+    with open('{}/NotSrcFiles/DictMain'.format(path), 'w') as file:
+        pass
+    with open('{}/NotSrcFiles/ContentPage'.format(path), 'w') as file:
         pass
 
     url = update.message.text.split()[0]
@@ -26,11 +33,11 @@ def build_json(bot, update):
             new_links.extend(parse_result)
         links = new_links
 
-    with open('/home/artur/PycharmProjects/ParseWikiMipt/NotSrcFiles/DictNext', 'w') as file:
+    with open('{}/NotSrcFiles/DictNext'.format(path), 'w') as file:
         json.dump(hist_next, file)
 
-    with open('/home/artur/PycharmProjects/ParseWikiMipt/NotSrcFiles/DictPrev', 'w') as file:
+    with open('{}/NotSrcFiles/DictPrev'.format(path), 'w') as file:
         json.dump(hist_prev, file)
 
-    with open('/home/artur/PycharmProjects/ParseWikiMipt/NotSrcFiles/DictMain', 'w') as file:
+    with open('{}/NotSrcFiles/DictMain'.format(path), 'w') as file:
         json.dump(hist_main, file)
