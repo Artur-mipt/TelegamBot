@@ -16,12 +16,20 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+TOKEN='550218738:AAEkwQKm-w31y9J6H6_UdduYSdRIMD-bUDo'
+REQUEST_KWARGS={
+    'proxy_url': 'http://190.117.115.150:65103',
+    # 'urllib3_proxy_kwargs': {
+    #    'username': 'telegram',
+    #    'password': 'telegram',
+    # }
+}
+
 
 def main():
 
     # using proxy
-    updater = Updater(token="550218738:AAEkwQKm-w31y9J6H6_UdduYSdRIMD-bUDo",
-                      request_kwargs={'proxy_url': 'http://190.117.115.150:65103'})
+    updater = Updater(token=TOKEN, request_kwargs=REQUEST_KWARGS)
 
     dispatcher = updater.dispatcher
 
@@ -38,7 +46,7 @@ def main():
     dispatcher.add_handler(CommandHandler('describe_word', describe_word))
 
     # starting bot
-    updater.start_polling(poll_interval=10)
+    updater.start_polling()
     updater.idle()
 
 
