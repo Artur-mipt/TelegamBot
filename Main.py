@@ -16,7 +16,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-TOKEN='550218738:AAEkwQKm-w31y9J6H6_UdduYSdRIMD-bUDo'
+TOKEN='TOKEN'
 REQUEST_KWARGS={
     'proxy_url': 'http://190.117.115.150:65103',
     # 'urllib3_proxy_kwargs': {
